@@ -1,6 +1,8 @@
 # AdvancedSD_Framework Part 2
-###Lab 11
-####Part a.
+### Lab 11
+
+#### Part a.
+
 Given is the simple unit testing framework code in the project SimpleTestFramework. This
 simple test framework will call all methods annotated with @Test.
 Expand the framework, so that it also support the @Before annotation. The framework should
@@ -36,18 +38,9 @@ You do not need to write code that checks if there is only 1 @before method.
 
 
 
-[//]: IMAGE here 
-[//]: ![Class Diagram question 2](https://github.com/itimotin/AdvancedSD_FrameworkPart2/blob/master/frameworkPatternInitialQuestion.png "Car  class diagram")
 
+#### Part b.
 
-[//]: The sequence diagram of a possible scenario looks like this:
-
-[//]: image Here
-[//]: ![Sequence diagram question 2](https://github.com/itimotin/AdvancedSD_FrameworkPart2/blob/master/sequenceDiagramFramework.png "Sequence diagram for Car")
-
-
-
-####Part b.
 In the framework of part a, add the following class with a simple assertEquals method.
 ```java
 package framework;
@@ -108,7 +101,7 @@ public class MyTest {
 }
 ```
 
-Part c.
+#### Part c.
 Now modify the code of part b, so that the framework also allow us to inject classes that are
 annotated with @Service:
 ```java
