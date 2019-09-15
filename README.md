@@ -9,22 +9,24 @@ So the test code:
 ```java
 @TestClass
 public class MyTest {
-@Before
-public void init() {
-System.out.println("perform initialization");
-}
-@Test
-public void testMethod1() {
-System.out.println("perform test method 1");
-}
-@Test
-public void testMethod2() {
-System.out.println("perform test method 2");
-}
+	@Before
+	public void init() {
+		System.out.println("perform initialization");
+ 	}
+	@Test
+	public void testMethod1() {
+		System.out.println("perform test method 1");
+	}
+	@Test
+	public void testMethod2() {
+		System.out.println("perform test method 2");
+	}
 }
 ```
-```sh
+
+
 Should give the following output:
+```sh
 perform initialization
 perform test method 1
 perform initialization
@@ -50,30 +52,32 @@ In the framework of part a, add the following class with a simple assertEquals m
 ```java
 package framework;
 public class Asserts {
-public static void assertEquals(int x, int y) {
-if (x != y)
-System.out.println("Fail: result = "+x+" but expected "+y);
+	public static void assertEquals(int x, int y) {
+		if (x != y)
+		System.out.println("Fail: result = "+x+" but expected "+y);
+	}
 }
-}
+```
 In the application package, add the following simple Calculator:
+```java
 public interface Calculator {
-public void reset() ;
-public int add(int newValue);
-public int subtract(int newValue);
+	public void reset() ;
+	public int add(int newValue);
+	public int subtract(int newValue);
 }
 public class CalculatorImpl implements Calculator {
-private int calcValue=0;
-public void reset() {
-calcValue=0;
-}
-public int add(int newValue) {
-calcValue=calcValue+newValue;
-return calcValue;
-}
-public int subtract(int newValue) {
-calcValue=calcValue-newValue;
-return calcValue;
-}
+	private int calcValue=0;
+	public void reset() {
+		calcValue=0;
+	}
+	public int add(int newValue) {
+		calcValue=calcValue+newValue;
+	 	return calcValue;
+	}
+	public int subtract(int newValue) {
+		calcValue=calcValue-newValue;
+		return calcValue;
+	}
 }
 ```
 
@@ -86,59 +90,60 @@ import framework.TestClass;
 import static framework.Asserts.*;
 @TestClass
 public class MyTest {
-Calculator calculator;
-@Before
-public void init() {
-calculator = new CalculatorImpl();
-}
-@Test
-public void testMethod1() {
-assertEquals(calculator.add(3),3);
-assertEquals(calculator.add(6),9);
-}
-@Test
-public void testMethod2() {
-assertEquals(calculator.add(3),3);
-assertEquals(calculator.subtract(6),-1);
-}
+	Calculator calculator;
+	@Before
+	public void init() {
+		calculator = new CalculatorImpl();
+	}
+	@Test
+	public void testMethod1() {
+		assertEquals(calculator.add(3),3);
+		assertEquals(calculator.add(6),9);
+	}
+	@Test
+	public void testMethod2() {
+		assertEquals(calculator.add(3),3);
+		assertEquals(calculator.subtract(6),-1);
+	}
 }
 ```
+
 Part c.
 Now modify the code of part b, so that the framework also allow us to inject classes that are
 annotated with @Service:
 ```java
 @Service
 public class CalculatorImpl implements Calculator {
-private int calcValue=0;
-public void reset() {
-calcValue=0;
-}
-public int add(int newValue) {
-calcValue=calcValue+newValue;
-return calcValue;
-}
-public int subtract(int newValue) {
-calcValue=calcValue-newValue;
-return calcValue;
-}
+	private int calcValue=0;
+	public void reset() {
+		calcValue=0;
+	}
+	public int add(int newValue) {
+		calcValue=calcValue+newValue;
+		return calcValue;
+	}
+	public int subtract(int newValue) {
+		calcValue=calcValue-newValue;
+		return calcValue;
+	}
 }
 @TestClass
 public class MyTest {
-@Inject
-Calculator calculator;
-@Before
-public void init() {
-calculator.reset();
-}
-@Test
-public void testMethod1() {
-assertEquals(calculator.add(3),3);
-assertEquals(calculator.add(4),7);
-}
-@Test
-public void testMethod2() {
-assertEquals(calculator.add(3),3);
-assertEquals(calculator.subtract(6),-1);
-}
+	@Inject
+	Calculator calculator;
+	@Before
+	public void init() {
+		calculator.reset();
+	}
+	@Test
+	public void testMethod1() {
+		assertEquals(calculator.add(3),3);
+		assertEquals(calculator.add(4),7);
+	}
+	@Test
+	public void testMethod2() {
+		assertEquals(calculator.add(3),3);
+		assertEquals(calculator.subtract(6),-1);
+	}
 }
 ```
